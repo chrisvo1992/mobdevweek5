@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (allFlashcards != null && allFlashcards.size() > 0) {
-            ((TextView) findViewById(R.id.flashcard_question_textview)).setText(allFlashcards.get(0).getQuestion());
-            ((TextView) findViewById(R.id.flashcard_answer_textview)).setText(allFlashcards.get(0).getAnswer());
+            flashcardQuestion.setText(allFlashcards.get(0).getQuestion());
+            flashcardAnswer.setText(allFlashcards.get(0).getAnswer());
         }
 
 
@@ -93,9 +93,39 @@ public class MainActivity extends AppCompatActivity {
                 allFlashcards = flashcardDatabase.getAllCards();
                 Flashcard flashcard = allFlashcards.get(currentCardDisplayedIndex);
 
-                ((TextView) findViewById(R.id.flashcard_question_textview)).setText(flashcard.getAnswer());
-                ((TextView) findViewById(R.id.flashcard_answer_textview)).setText(flashcard.getQuestion());
+                flashcardQuestion.setText(flashcard.getQuestion());
+                flashcardAnswer.setText(flashcard.getAnswer());
             }
+        });
+
+        //OnClickListener for trash button
+        findViewById(R.id.flashcard_trash_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                flashcardDatabase.deleteCard(flashcardQuestion.getText().toString());
+                allFlashcards = flashcardDatabase.getAllCards();
+                currentCardDisplayedIndex--;
+
+                if (currentCardDisplayedIndex < 0 && allFlashcards.size() > 0){
+                    currentCardDisplayedIndex = 0;
+                    Flashcard flashcard = allFlashcards.get(currentCardDisplayedIndex);
+                    flashcardQuestion.setText(flashcard.getQuestion());
+                    flashcardAnswer.setText(flashcard.getAnswer());
+
+
+                } else if(currentCardDisplayedIndex < 0){
+                    String prompt = getString(R.string.empty_state);
+                    flashcardQuestion.setText(prompt);
+                    flashcardAnswer.setText(prompt);
+
+                } else{
+                    Flashcard flashcard = allFlashcards.get(currentCardDisplayedIndex);
+                    flashcardQuestion.setText(flashcard.getQuestion());
+                    flashcardAnswer.setText(flashcard.getAnswer());
+
+                }
+            }
+
         });
 
     } // OnCreate
