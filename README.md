@@ -19,3 +19,7 @@ Have the ability for a user to add their own question and answer flash cards. Ke
 - [X] Flashcards are shown in random order instead of the order they were created in
 - [ ] User can edit a card and see the edit saved when they browse through their deck of cards
 - [ ] User can create flashcards with multiple answers and be able to browse through cards with multiple choice answers shown
+
+
+<img src="https://i.imgur.com/DRZGp84.gif" width=200><br>
+
