@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     TextView flashcardQuestion;
@@ -77,17 +78,13 @@ public class MainActivity extends AppCompatActivity {
                 // don't try to go to next card if you have no cards to begin with
                 if (allFlashcards.size() == 0)
                     return;
-                // advance our pointer index so we can show the next card
-                currentCardDisplayedIndex++;
 
-                // make sure we don't get an IndexOutOfBoundsError if we are viewing the last indexed card in our list
-                if(currentCardDisplayedIndex >= allFlashcards.size()) {
-                    Snackbar.make(v,
-                            "You've reached the end of the cards, going back to start.",
-                            Snackbar.LENGTH_SHORT)
-                            .show();
-                    currentCardDisplayedIndex = 0;
+                //Randomly choose the next card and ensure the current card won't be chosen
+                int nextCard = getRandomNumber(0,allFlashcards.size());
+                while(nextCard == currentCardDisplayedIndex){
+                    nextCard = getRandomNumber(0,allFlashcards.size());
                 }
+                currentCardDisplayedIndex = nextCard;
 
                 // set the question and answer TextViews with data from the database
                 allFlashcards = flashcardDatabase.getAllCards();
@@ -148,8 +145,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
-
-
+    }
+    //function to randomize card
+    public int getRandomNumber(int minNumber, int maxNumber){
+        Random rand = new Random();
+        return rand.nextInt(maxNumber - minNumber) ;
     }
 
 
