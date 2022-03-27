@@ -8,6 +8,9 @@ Have the ability for a user to add their own question and answer flash cards. Ke
 
 <img src="https://i.imgur.com/SKTZFgU.gif" width=200><br>
 
+##Updated: Flashcard will be saved to database and will show up after app relaunches
+
+<img src="https://i.imgur.com/gvkyZtc.gif" width=200><br>
 
 
 ## Required
